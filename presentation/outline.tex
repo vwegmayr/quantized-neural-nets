@@ -1,38 +1,27 @@
-\documentclass{beamer}
-
-\usetheme{}
-\title[Qunatized Neural Networks]{Quantized Neural Networks:}
-\subtitle{Training Neural Nets with Low Precision Weights \& Activations}
-\author{Hubara, Courbariaux, Soudry, El-Yaniv, Bengio}
-\institute{}
-\date{}
-
-\setbeamercolor{page number in head/foot}{fg=black}
-\setbeamertemplate{footline}[frame number]
-\usenavigationsymbolstemplate{}
+\documentclass{article}
+\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
 
 \begin{document}
 
-\begin{frame}
-\titlepage
-\end{frame}
+\pagenumbering{gobble}
 
-\begin{frame}{Motivation}
+\subsubsection*{Motivation}
     \begin{itemize}
-        \item Computational Efficiency (inkl. Horowitz)
-        \item Improved Generalization
+        \item Computational Efficiency (inkl. Horowitz) !! Why do we do this?
+        \item Improved Generalization (train with low precision (lp) but keep hp weights and use them during test -> better results) Some power gains during training, no power gains during test.
+        \item Energy efficiency during test time if you use lp weights, sacrifice accuracy for power saving
         \item Examples and related concepts: dropout, ReLu (sparse gradient),
         influence of feature discretization, 
     \end{itemize}
-\end{frame}
 
-\begin{frame}{Binarization Schemes}
+
+\subsubsection*{Binarization Schemes}
     \begin{itemize}
         \item Deterministic vs. Stochastic
     \end{itemize}
-\end{frame}
 
-\begin{frame}{Gradient Estimation}
+
+\subsubsection*{Gradient Estimation}
     \begin{itemize}
         \item Path Derivative Gradient Estimators (reparametrization, ST,
         SlopeAnnealing)
@@ -40,66 +29,45 @@
         \item Expectation Backpropagation
     \end{itemize}
     See Gumble Softmax Paper for overview
-\end{frame}
 
-\begin{frame}{Algorithms: Adam + BNN}
+\subsubsection*{Algorithms Adam + BN}
     \begin{itemize}
         \item General Review
         \item Illustrate their importance for QNNs
         \item Implement algorithm to see how it works without Adam and BN?
     \end{itemize}
-\end{frame}
 
-\begin{frame}{Full Algorithm}
+\subsubsection*{Full Algorithm}
     \begin{itemize}
         \item Try to visualize, illustrate procedure (highlight similarities and
         differences to conventional NN training and inference)
     \end{itemize}
-\end{frame}
 
-\begin{frame}{Experiments}
+\subsubsection*{Experiments}
     \begin{itemize}
         \item Describe different NN architectures (DNN, CNN, RNN)
         \item Describe data sets (MNIST, CIFAR, ImageNet, PennTree)
         \item binary vs low precision
     \end{itemize}
-\end{frame}
 
-\begin{frame}{Results}
+\subsubsection*{Results}
     \begin{itemize}
         \item Training results
         \item Performance results (look up older benchmarks to compare loss in
         in accuracy to)
         \item find comparisons from other references
     \end{itemize}
-\end{frame}
 
-\begin{frame}{}
+\pagebreak
+
+\section*{Evolution of the QNN paper}
+
+\subsubsection*{Training NN with lp multiplications}
     \begin{itemize}
-        \item 
+    \item The inital motivation was to reduce the power consumption of multipliers, which are claimed to be the most power hungry.
+    \item A common pattern already shows: lp multipliers + hp accumulators. Parameter updates are also hp.
+    \item Problem with fixed point: low dynamic range $\rightarrow$ dynamic fixed point.
+    \item Evaluation of maxout on MNIST, CIFAR, SVHN
     \end{itemize}
-\end{frame}
-
-\begin{frame}[allowframebreaks]
-  \frametitle<presentation>{Further Reading}    
-  \begin{thebibliography}{8}
-
-  \beamertemplatearticlebibitems
-  \bibitem{Hubara2016}
-    {\em Training Neural Nets with Low Precision Weights \& Activations}.
-    \newblock {Itay Hubara, Matthieu Courbariaux, Daniel Soudry, Ran El-Yaniv,
-    Yoshua Bengio}
-    \newblock ArXiv 2016
-
-  \beamertemplatearticlebibitems
-  \bibitem{DoReFaNet2016}
-    {DoReFa-Net: Training Low Bitwidth Convolutional Neural Networks with Low
-    Bitwidth Gradients}
-    \newblock {Shuchang Zhou, Zekun Ni, Xinyu Zhou, He Wen, Yuxin Wu,
-    Yuheng Zou}
-    \newblock ArXiv 2016
-
-  \end{thebibliography}
-\end{frame}
 
 \end{document}
