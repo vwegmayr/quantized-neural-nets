@@ -66,8 +66,21 @@
     \begin{itemize}
     \item The inital motivation was to reduce the power consumption of multipliers, which are claimed to be the most power hungry.
     \item A common pattern already shows: lp multipliers + hp accumulators. Parameter updates are also hp.
+    \item Cost of multiplier $O(precision^2)$ while cost of accumulator $O(precision)$
     \item Problem with fixed point: low dynamic range $\rightarrow$ dynamic fixed point.
-    \item Evaluation of maxout on MNIST, CIFAR, SVHN
+    \item Evaluation of maxout on MNIST, CIFAR, SVHN with three formats (floating
+    point, fixed point, dynamic fixed point)
+    \item Techniques: Maxout, dropout, momentum, weight decay, dyn. fixed point, update prc vs prop prec.
+    \item Comparison floating point vs. fixed point ?
+    \item Explain demand for sufficient precison of update (compared to Propagations) due to SGD updates
+    \item Half-precision has little to no impact (hp fine-tuning?)
+    \item Couple of plots showing final test error as function of everything
+    \item References to lp network training in the 90ies!
     \end{itemize}
+
+\subsubsection*{Binary Connect: Training DNNs with binary weights during propagations}
+\begin{itemize}
+\item 
+\end{itemize}
 
 \end{document}
