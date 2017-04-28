@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1493387985 "/home/vikweg/quantized-neural-nets/presentation/outline.tex" "Output/outline.pdf" "outline" 1493387985
+["pdflatex"] 1493389510 "/home/vikweg/quantized-neural-nets/presentation/outline.tex" "Output/outline.pdf" "outline" 1493389510
   "/etc/texmf/web2c/texmf.cnf" 1482223684 1101 af7716885e081ab43982cab7b4672c1a ""
-  "/home/vikweg/quantized-neural-nets/presentation/outline.tex" 1493387984 3265 933626c5ffde45e7b85fbb0a7cd52655 ""
+  "/home/vikweg/quantized-neural-nets/presentation/outline.tex" 1493389509 3500 48f8af49132ad78bd4c9d95795685ae7 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1136768653 1328 c834bbb027764024c09d3d2bf908b5f0 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm" 1136768653 1324 c910af8c371558dc20f2d7822f66fe64 ""
@@ -24,9 +24,9 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1392645748 31083 1dfd8bf685ce0009c40532fedf8a7c53 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1482223785 1346346 7f2b8b715a9ddb095afe3697a6ba02b5 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1482223741 3822875 3add8437a9963ad43ccb327cb4bfc7f2 ""
-  "Output/outline.aux" 1493387985 8 a94a2480d3289e625eea47cd1b285758 ""
-  "outline.tex" 1493387984 3265 933626c5ffde45e7b85fbb0a7cd52655 ""
+  "Output/outline.aux" 1493389510 8 a94a2480d3289e625eea47cd1b285758 ""
+  "outline.tex" 1493389509 3500 48f8af49132ad78bd4c9d95795685ae7 ""
   (generated)
   "Output/outline.pdf"
-  "Output/outline.aux"
   "Output/outline.log"
+  "Output/outline.aux"
