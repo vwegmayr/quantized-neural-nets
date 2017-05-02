@@ -65,6 +65,7 @@
 \subsubsection*{Training NN with lp multiplications}
     \begin{itemize}
     \item The inital motivation was to reduce the power consumption of multipliers, which are claimed to be the most power hungry.
+    \item No Binarization of anything yet, only lp weights
     \item A common pattern already shows: lp multipliers + hp accumulators. Parameter updates are also hp.
     \item Cost of multiplier $O(precision^2)$ while cost of accumulator $O(precision)$
     \item Problem with fixed point: low dynamic range $\rightarrow$ dynamic fixed point.
@@ -80,8 +81,77 @@
     \end{itemize}
 
 \subsubsection*{Binary Connect: Training DNNs with binary weights during propagations}
-\begin{itemize}
-\item Emphasis shifts from 
-\end{itemize}
+    \begin{itemize}
+    \item Emphasis shifts from efficiency to generalization properties (ala dropout)
+    \item Only binarization of weights, activations not yet binary! Backprop still contains muls!
+    \item mention discretization as form of noise which preserves expected value of weights.
+    \item Again: need for hp accumulation (cite several studies incl haml limtied
+    precision one), Interesting: reference which says brain synapse precision is
+    around 6-12 bits
+    \item Relations to dropout, dropconnect (!), variational weight noise?
+    \item DropConnect: Only expected value of weights needs hp
+    \item Another reference about hardware cost of add+mul [22]
+    \item Binarization: Deterministic vs. stochastic, Hard sigmoid more efficient!
+    \item Algorithm: Biases not binarized!
+    \item Tricks: Weight clipping, batch norm, adam, normalized initialization,
+    L2-SVM output layer
+    \item Inference: Three ways: keep binary weights, use hp weights or ensemble of
+    binary networks (sampled)
+    \item Compute dropout+DNN Performance numbers for CIFAR + SVHN?
+    \item Fig 1: feature coadaption comparison
+    \item Ref. [39] about binary DNN: Fixed-Point feedforward deep Neural...retrains network!
+    \item 2/3 of all muls are due to forward/backward prop
+    \item No demonstration of power saving/efficieny gains
+    \end{itemize}
+
+\subsubsection*{Neural Networks with few Multiplications}
+    \begin{itemize}
+    \item Muls again in foucs (``Multiplier light networks'')
+    \item Binarization of weights + quantization (!) of activations
+    \item No quantization of BN or ADAM
+    \item Convert muls in backprop to bitshifts by pow2 quantization of activations
+    \item Ref backprop without muls 1999
+    \item First mention of random number generation cost
+    \item Ternary connect -1,0,+1, sampling scheme similar to lp reference!
+    \item how does hp error signal back prop? how about hp input?
+    \item Most muls in weight updates (2MN+3M muls at least)
+    \item Mention muls incurred by batch norm! Cost of divison!
+    \item Table 2 analysis of total num of muls
+    \item Compares only to ordinary SGD (but ok they use the same for the QNN)
+    \item QNN converges slower but better in the end fig 1
+    \item They dont explain the bit shift operations properly
+    \item non-uniform distribution of activations
+    \item Explanation of regularization by lp weights - VERY similar to entropy
+    SDG ideas! large-basin solution, small description length, Additional reference
+    (Neelakatan: Adding gradient noise)
+    \end{itemize}
+
+\subsubsection*{Quantized Neural Networks}
+
+    \begin{itemize}
+        \item Very lp activations + 6bit gradients (enabling bit-wise ops)
+        \item first to actually consider gradient of det./stoch. binary units.
+        \item first experiments on RNNs + ImageNet
+        \item Extensive references (e.g. network compression for inference)
+        \item MAC ops replaced by XNOR and popcount ops
+        \item CNNs benefit mainly from activation quantization (large neuron to
+        weight ratio)
+        \item Binary kernel repetition (worth mentioning?)
+        \item Abandon stochastic binarization (only in activations at train time)
+        \item NEW: Gradient estimators (clipped straight through) due to binary
+        activations.
+        \item Shaky argument about independence of binarizations for the
+        ``derivation'' of the clipped ST estimator. But intuitively ok (eq. 6)
+        \item Address cost of BN, which is particularly large for CNNs + inverse sqrt
+        \item How does the approximate shift work in case of negative argument?
+        \item Make screenshpt of ``very unoptimized'' baseline gpu kernel (theano repo),
+        shift based BN+ADAM are in Torch repo
+        \item Algorithm 1: input binarization? activation functions missing - no,
+        they use det./stoch. binary units!
+        \item Need to disentangle back-prop equations...
+        \item Input handling: 8bit fixed point , check algorithm 4...
+        \item More than one bit: Quantization+XNORpopcount, Ref to DoReFa net and
+        logarithmic data representation papers.
+    \end{itemize}
 
 \end{document}
