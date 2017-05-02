@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1493674979 "/home/vwegmayr/ETH/quantized-neural-nets/presentation/outline.tex" "Output/outline.pdf" "outline" 1493674979
-  "/etc/texmf/web2c/texmf.cnf" 1477468058 1101 af7716885e081ab43982cab7b4672c1a ""
-  "/home/vwegmayr/ETH/quantized-neural-nets/presentation/outline.tex" 1493674978 7689 e725778e2b03e7f76f9b5392d23bb050 ""
+["pdflatex"] 1493749390 "/home/vikweg/quantized-neural-nets/presentation/outline.tex" "Output/outline.pdf" "outline" 1493749391
+  "/etc/texmf/web2c/texmf.cnf" 1482223684 1101 af7716885e081ab43982cab7b4672c1a ""
+  "/home/vikweg/quantized-neural-nets/presentation/outline.tex" 1493749390 9077 07285d58dadcca048a497ab165ce2497 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1136768653 1328 c834bbb027764024c09d3d2bf908b5f0 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm" 1136768653 1324 c910af8c371558dc20f2d7822f66fe64 ""
@@ -22,11 +22,11 @@
   "/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty" 1156702488 2266 7054435e4584a41cf53b0a7ca624d0cb ""
   "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1392645748 31083 1dfd8bf685ce0009c40532fedf8a7c53 ""
   "/usr/share/texmf/web2c/texmf.cnf" 1392645748 31083 1dfd8bf685ce0009c40532fedf8a7c53 ""
-  "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1477468121 1346346 7f2b8b715a9ddb095afe3697a6ba02b5 ""
-  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1477468093 3822875 462e8d657b6855959305f83eb1cc3a0c ""
-  "Output/outline.aux" 1493674979 8 a94a2480d3289e625eea47cd1b285758 ""
-  "outline.tex" 1493674978 7689 e725778e2b03e7f76f9b5392d23bb050 ""
+  "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1482223785 1346346 7f2b8b715a9ddb095afe3697a6ba02b5 ""
+  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1482223741 3822875 3add8437a9963ad43ccb327cb4bfc7f2 ""
+  "Output/outline.aux" 1493749391 8 a94a2480d3289e625eea47cd1b285758 ""
+  "outline.tex" 1493749390 9077 07285d58dadcca048a497ab165ce2497 ""
   (generated)
   "Output/outline.aux"
-  "Output/outline.pdf"
   "Output/outline.log"
+  "Output/outline.pdf"

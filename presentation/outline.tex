@@ -107,7 +107,8 @@
 \subsubsection*{Neural Networks with few Multiplications}
     \begin{itemize}
     \item Muls again in foucs (``Multiplier light networks'')
-    \item Binarization of weights + quantization (!) of activations
+    \item Binarization of weights + quantization (!) of activations (but only in backprop),
+    activations in forward phase are not quantized!
     \item No quantization of BN or ADAM
     \item Convert muls in backprop to bitshifts by pow2 quantization of activations
     \item Ref backprop without muls 1999
@@ -139,7 +140,8 @@
         \item Binary kernel repetition (worth mentioning?)
         \item Abandon stochastic binarization (only in activations at train time)
         \item NEW: Gradient estimators (clipped straight through) due to binary
-        activations.
+        activations. But: weights are binarized as well, but still they take
+        gradients w.r.t. weights as if they were continuous...
         \item Shaky argument about independence of binarizations for the
         ``derivation'' of the clipped ST estimator. But intuitively ok (eq. 6)
         \item Address cost of BN, which is particularly large for CNNs + inverse sqrt
@@ -149,9 +151,39 @@
         \item Algorithm 1: input binarization? activation functions missing - no,
         they use det./stoch. binary units!
         \item Need to disentangle back-prop equations...
+        \item What about multiplications in BackBatchNorm? No mention.
         \item Input handling: 8bit fixed point , check algorithm 4...
         \item More than one bit: Quantization+XNORpopcount, Ref to DoReFa net and
         logarithmic data representation papers.
+        \item Extensions:
+        \begin{itemize}
+            \item Approximate BackBatchNorm as well (if not already done)
+            \item Use non-uniform quantization scheme
+        \end{itemize}
     \end{itemize}
+
+
+\subsubsection*{ZipML Framework}
+\begin{itemize}
+    \item They apply (non-uniform) quantization scheme only to input data (?)
+    \item How would you apply such an adaptive scheme to weights, activations, gradients?
+\end{itemize}
+
+\subsubsection*{XNOR-Net}
+\begin{itemize}
+    \item Their comparison to BNN on ImageNet is really strange, did they implement it
+    badly? Because back then BNN did not yet have numbers for imagenet, but they claim
+    it performs worse than BNN. Only later Bengio published (better!) numbers than XNOR.
+    \item Memory/op count for AlexNet (compare DNN and CNN weight/activation counts)
+    \item They consider binary weights+activations and only binary weights.
+    \item Mention several network compression approaches (on pretrained networks)
+    \item Quite extensive review of related techiques.
+    \item 
+\end{itemize}
+
+\subsubsection*{}
+\begin{itemize}
+    \item 
+\end{itemize}
 
 \end{document}
