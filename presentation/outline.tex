@@ -64,16 +64,20 @@
 
 \subsubsection*{Training NN with lp multiplications}
     \begin{itemize}
-    \item The inital motivation was to reduce the power consumption of multipliers, which are claimed to be the most power hungry.
+    \item The inital motivation was to reduce the power consumption of multipliers,
+    which are claimed to be the most power hungry.
     \item No Binarization of anything yet, only lp weights
-    \item A common pattern already shows: lp multipliers + hp accumulators. Parameter updates are also hp.
+    \item A common pattern already shows: lp multipliers + hp accumulators.
+    Parameter updates are also hp.
     \item Cost of multiplier $O(precision^2)$ while cost of accumulator $O(precision)$
     \item Problem with fixed point: low dynamic range $\rightarrow$ dynamic fixed point.
     \item Evaluation of maxout on MNIST, CIFAR, SVHN with three formats (floating
     point, fixed point, dynamic fixed point)
-    \item Techniques: Maxout, dropout, momentum, weight decay, dyn. fixed point, update prc vs prop prec.
+    \item Techniques: Maxout, dropout, momentum, weight decay, dyn. fixed point,
+    update prc vs prop prec.
     \item Comparison floating point vs. fixed point ?
-    \item Explain demand for sufficient precison of update (compared to Propagations) due to SGD updates
+    \item Explain demand for sufficient precison of update (compared to Propagations)
+    due to SGD updates
     \item Half-precision has little to no impact (hp fine-tuning?)
     \item Couple of plots showing final test error as function of everything
     \item References to lp network training in the 90ies!
@@ -158,7 +162,11 @@
         \item Extensions:
         \begin{itemize}
             \item Approximate BackBatchNorm as well (if not already done)
-            \item Use non-uniform quantization scheme
+            \item Use non-uniform quantization scheme for weights/activations
+            \item consider a gradient estimate for quantized weights and maybe
+            a better estimate than the straight through for activations.
+            \item investigate degradation depending on which layers are quantized.
+            Are early layers more sensitive? Where can one quantize more aggressively?
         \end{itemize}
     \end{itemize}
 
@@ -178,7 +186,98 @@
     \item They consider binary weights+activations and only binary weights.
     \item Mention several network compression approaches (on pretrained networks)
     \item Quite extensive review of related techiques.
+    \item Interesting equivalence of sign(W) to minimum square distance to W
+    \item They claim ``there is no need to keep hp weights''...in contrast to BNN!
+    \item Procedure for activation binarization not quite as elegant (quite heuristic).
+    \item Influence of pooling on binarized input, use of relu after binary conv.
+    \item They actually quantize the gradient as well, but with max scaling - drop
+    in accuracy only 1.4\%...suspicious.
+    \item Very similar to QNN, only difference is the scaling factor
+    \item Speed-up calculations (62x in theory)
     \item 
+\end{itemize}
+
+\subsubsection*{DoReFa-Net}
+\begin{itemize}
+    \item Gradients in BNN have hp, backprop convolutions consume much time, but actually
+    they only sum hp numbers, no muls. DoReFa-Net tries to replace those with bit conv
+    kernels. So BNN comes from the mul side, but DoReFa-Net also complains about
+    hp adds...
+    \item Introduces low bit weights, activations and gradients.
+    \item Why does XNOR gradient binarization not count as binary?
+    \item Configuration-Space Exploration, precision matters most in gradients,
+    activations and weights (in this order). (W,A,G) ca (1,2,4)bits
+    \item Gradients need to be stochastically quantized + larger value range.
+    \item They address the need to use the straight through estimator for quantization,
+    however, they simply use the identity constrained to [0,1]. Is there something
+    better for quantize\_k?
+    \item Discussion of straight-through estimators for BNN and XNOR
+    \item XNOR-Net: Scaling factors make bit-convs impossible for weights*grads (?)
+    \item They fail to reproduce results of XNOR-Net for binary neurons! XNOR reports
+    severe degradation for BNN...what is wrong there?
+    \item They report strong dependence of results on activation function
+    \item Funny gradient quantization, mapping to [0,1] plus artificial noise which
+    they say is critical. + each image in batch has it own scaling factor
+    \item First+last layer weights not quantized! (larger degradation)
+    \item Question: Can you get good performance with just low precsion but 
+    without all the hocus pocus?
+    \item They recgnize need to explicitly take into account the gradient estimate
+    for the weight binarization!
+    \item How do you backprop through pooling?
+    \item Number of channels affects robustness to quantization (table 1). more 
+    complex models are more robust.
+    \item They have problems to close gap between lp and hp models, they need to
+    use hp initialization for lp models.
+    \item NO efficiency evaluation
+\end{itemize}
+
+\subsubsection*{DropConnect}
+\begin{itemize}
+    \item Similar to Dropout, but they put connections to zero
+    \item Derive bounds on generalization performance
+    \item Regularization: weight decay, Bayesian, early stopping, dropout, weight
+    elimination, mention more? maxnorm, 
+    \item Why is Dropconnect (and dropout) only suitable for fully conn? ok less
+    parameters in convs, but actually dropout claims positive effects as well
+    \item Quite intensive: different mask for each sample
+    \item Dropout does r*a(Wx) but they do a(r*Wx) which introduces problems with
+    proper sampling at test time
+    \item Some formal insights to dropout
+    \item Still it seems that they did not properly read dropout (FC issue, averaging
+    at test time)
+\end{itemize}
+
+\subsubsection*{Outline Talk}
+\begin{itemize}
+    \item Motivation: Power wall, limitations, Horowitz, Sejnowski, why turn to
+    spezialized hardware, no free lunch theorem? Potential computational savings
+    by reduced precision
+    \item Show that quantization leads to less degradation than one might expect.
+    In constrast: it can even improve generalization under certain circumstances.
+    Make analogy to entropy-SGD.
+    \item Analysis of forward+backward propagation ops: Identify bottlenecks and
+    demonstrate quantization of ops step by step.
+    \item Illustrate concepts like Straight-Through-Estimator
+    \item Explore configuration space: which parts are sensitive to quantization?
+    Provide some intuition (from experiments). NN architecture, dataset, optimization, etc.
+    \item Tricks: Show what tricks are used. Which are really necessary?
+    \item Hidden ops \& performance holes: Point out where people ignore bottlenecks
+    and where they introduce new ones.
+\end{itemize}
+
+\subsubsection*{Questions}
+\begin{itemize}
+
+    \item what is good/noteworthy about QNNs?
+    \item Where do the most significant benefits (computation and accuracy) come from (which aspects)?
+    \item what are the major problems with QNNs theoretically/practically?
+    \item what do we need to solve before QNNs can be fully employed?
+    \item how could one extend/improve QNNs?
+    \item How should I go about showing computational gains? All these papers pretty
+    much avoid to show it explicitly.
+    \item How does the <<>> shift thing work?
+    \item ZipML applies quantization scheme only to input?
+    \item XNOR-Net...how trustworthy?
 \end{itemize}
 
 \subsubsection*{}
