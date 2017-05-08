@@ -66,7 +66,7 @@
     \begin{itemize}
     \item The inital motivation was to reduce the power consumption of multipliers,
     which are claimed to be the most power hungry.
-    \item No Binarization of anything yet, only lp weights
+    \item No Binarization of anything yet, only lp weights during forward-prop
     \item A common pattern already shows: lp multipliers + hp accumulators.
     Parameter updates are also hp.
     \item Cost of multiplier $O(precision^2)$ while cost of accumulator $O(precision)$
@@ -187,14 +187,12 @@
     \item Mention several network compression approaches (on pretrained networks)
     \item Quite extensive review of related techiques.
     \item Interesting equivalence of sign(W) to minimum square distance to W
-    \item They claim ``there is no need to keep hp weights''...in contrast to BNN!
     \item Procedure for activation binarization not quite as elegant (quite heuristic).
     \item Influence of pooling on binarized input, use of relu after binary conv.
     \item They actually quantize the gradient as well, but with max scaling - drop
     in accuracy only 1.4\%...suspicious.
     \item Very similar to QNN, only difference is the scaling factor
     \item Speed-up calculations (62x in theory)
-    \item 
 \end{itemize}
 
 \subsubsection*{DoReFa-Net}
